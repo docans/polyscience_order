@@ -4,6 +4,6 @@
  * A module that updates the polyscience order table in the database when the order is made
  */
  
-function hook_commerce_checkout_complete($order) {
+function polyscience_order_commerce_checkout_complete($order) {
   // No example.
 }
