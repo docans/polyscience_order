@@ -62,35 +62,49 @@ function polyscience_order_schema() {
     $schema['polyscience_order_order'] = array(
     
     // Example (partial) specification for table "node".
-    'description' => 'Table for polyscience Customers from commerce customer profile',
-    'fields' => array(
-      'nid' => array(
-        'description' => 'The primary identifier for a node.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'vid' => array(
-        'description' => 'The current {node_revision}.vid version identifier.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'type' => array(
-        'description' => 'The {node_type} of this node.',
-        'type' => 'varchar',
-        'length' => 32,
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'title' => array(
-        'description' => 'The title of this node, always treated as non-markup plain text.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-        'default' => '',
-      ),
+   'description' => 'The base table for orders.',
+  'fields' => array(
+    'p_order_id' => array(
+      'description' => 'The primary identifier for an order.',
+      'type' => 'serial',
+      'unsigned' => TRUE,
+      'not null' => TRUE,
+    ),
+    'order_number' => array(
+      'description' => 'The order number displayed to the customer.',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+    ),
+    'uid' => array(
+      'description' => 'The users.uid that owns this order i.e. customer Id).',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+	'shipping_address' => array(
+	'description' => 'The shipping address of the order if different from billing address.',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+	),
+	'contact_name' => array(
+	'description' => 'The contact name,phone,email if different from customer.',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => FALSE,
+	),
+	'cc_charged_sucess' => array(
+      'description' => 'boolean for credit card successfuly charged.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+	'order_imported_sucess' => array(
+      'description' => 'boolean for order successfuly imported into erp.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
     ),
     'indexes' => array(
       'node_changed' => array('changed'),
@@ -110,7 +124,7 @@ function polyscience_order_schema() {
         'columns' => array('uid' => 'uid'),
       ),
     ),
-    'primary key' => array('nid'),
+    'primary key' => array('p_order_id'),
   );
   
     $schema['polyscience_customer_line'] = array(
