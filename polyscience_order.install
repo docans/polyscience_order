@@ -3,8 +3,13 @@
  *
  *
  */
+
+// Table to be created when the module is installed
+ 
 function polyscience_order_schema() {
   $schema= array();
+  
+  // Function to create the table for the customers of an order
   $schema['polyscience_order_customer'] = array(
     
     // Example (partial) specification for table "node".
@@ -58,7 +63,8 @@ function polyscience_order_schema() {
     ),
     'primary key' => array('nid'),
   );
-  
+
+    // Function to create the table for the order component of an order of an order  
     $schema['polyscience_order_order'] = array(
     
     // Example (partial) specification for table "node".
@@ -127,6 +133,7 @@ function polyscience_order_schema() {
     'primary key' => array('p_order_id'),
   );
   
+    //Function to create the table for the line items of an order 
     $schema['polyscience_customer_line'] = array(
     
     // Example (partial) specification for table "node".
